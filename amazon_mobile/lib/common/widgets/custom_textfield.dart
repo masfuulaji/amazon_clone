@@ -12,20 +12,22 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-          hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.black38,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
             color: Colors.black38,
-          ))),
+          ),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black38,
+          ),
+        ),
+      ),
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter $hintText';
         }
         return null;
       },

@@ -1,6 +1,7 @@
 import 'package:amazon_mobile/common/widgets/custom_button.dart';
 import 'package:amazon_mobile/common/widgets/custom_textfield.dart';
 import 'package:amazon_mobile/constants/global_variables.dart';
+import 'package:amazon_mobile/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 enum Auth {
@@ -23,6 +24,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final AuthService authService = AuthService();
 
   @override
   void dispose() {
@@ -30,6 +32,23 @@ class _AuthScreenState extends State<AuthScreen> {
     _passwordController.dispose();
     _nameController.dispose();
     super.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+      name: _nameController.text,
+    );
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -100,7 +119,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           text: 'Sign Up',
                           onPressed: () {
                             if (_signUpFormKey.currentState!.validate()) {
-                              print('Sign Up');
+                              signUpUser();
                             }
                           },
                         )
@@ -152,7 +171,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           text: 'Sign In',
                           onPressed: () {
                             if (_signInFormKey.currentState!.validate()) {
-                              print('Sign In');
+                              signInUser();
                             }
                           },
                         )
